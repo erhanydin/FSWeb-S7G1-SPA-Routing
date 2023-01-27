@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import { useParams } from 'react-router-dom';
+
 export default function Film(props) {
   const [movie, setMovie] = useState();
+  const test = useParams();
 
-  let id = 1;
+  let id = test.id;
   // URL'den alınan :id parametresini bu değişkene aktarın
 
   useEffect(() => {
     axios
       .get(`http://localhost:5001/api/filmler/${id}`) // Bu uç noktayı Postman'le çalışın
       .then(response => {
+          console.log(response.data);
+          setMovie(response.data);
           // Bu kısmı log statementlarıyla çalışın
           // ve burdan gelen response'u 'movie' e aktarın
       })
